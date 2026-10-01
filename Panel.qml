@@ -498,6 +498,8 @@ Panel {
 
   function loadThumbnail() {
     var id = root.musicStatus ? String(root.musicStatus.videoId || "") : ""
+    // Status refreshes on every open; keep the current art if the track hasn't changed.
+    if (id === root.thumbnailVideoId && root.thumbnailSource !== "") return
     root.thumbnailVideoId = root.isVideoId(id) ? id : ""
     root.thumbnailSource = ""
     if (root.thumbnailVideoId !== "") root.startProcess(thumbnailProc, "thumbnail")

@@ -866,6 +866,9 @@ def cmd_thumbnail(args):
     video_id = args[0]
     os.makedirs(THUMBNAIL_CACHE_DIR, mode=0o700, exist_ok=True)
     path = os.path.join(THUMBNAIL_CACHE_DIR, f"{video_id}.jpg")
+    # Cached files were size- and dimension-checked when written.
+    if os.path.isfile(path) and os.path.getsize(path) > 0:
+        return
     try:
         request = urllib.request.Request(
             f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",
