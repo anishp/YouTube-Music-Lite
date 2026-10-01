@@ -65,9 +65,9 @@ are included in this repository.
 Browser cookies are not only read at login. If the saved session stops
 validating, any player action that needs your account re-reads the YouTube
 cookies from your Chromium-based browser (or Firefox) and overwrites
-`auth.json` with them. To stop this, delete `~/.config/yt-music/auth.json`;
-also sign out of YouTube in the browser if you don't want a later
-`yt-music-ctl login` to pick the session up again.
+`auth.json` with them. To stop this, run `yt-music-ctl logout`, which deletes
+`~/.config/yt-music/auth.json`; also sign out of YouTube in the browser if you
+don't want a later `yt-music-ctl login` to pick the session up again.
 
 ## License
 
