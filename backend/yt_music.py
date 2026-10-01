@@ -966,6 +966,18 @@ def cmd_stop(args):
     print(json.dumps({"ok": True}))
 
 
+def cmd_logout(args):
+    mpv_kill()
+    # Only the local auth files; browser cookies are left alone.
+    for name in ("auth.json", ".auth-test.json"):
+        try:
+            os.remove(os.path.join(CONFIG_DIR, name))
+        except FileNotFoundError:
+            pass
+    write_status({"ok": True, "playing": False})
+    print(json.dumps({"ok": True}))
+
+
 def cmd_seek_pct(args):
     if not mpv_is_running():
         fail("Nothing playing")
@@ -1042,6 +1054,7 @@ COMMANDS = {
     "seek-pct": cmd_seek_pct,
     "volume": cmd_volume,
     "stop": cmd_stop,
+    "logout": cmd_logout,
     "like": cmd_like,
     "dislike": cmd_dislike,
     "unlike": cmd_unlike,
