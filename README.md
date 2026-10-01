@@ -35,6 +35,9 @@ The installer creates a private virtual environment under
 lock, installs the bar plugin, and enables it in the Omarchy bar. The installer
 does not upgrade pip or download unpinned dependencies.
 
+If you added the plugin with `omarchy plugin add`, run `./install.sh` from
+`~/.config/omarchy/plugins/yt-music` to install the backend.
+
 Log in after installation:
 
 ```bash

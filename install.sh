@@ -29,10 +29,13 @@ python3 -m venv "${VENV}"
 "${VENV}/bin/python" -m pip install --require-hashes --only-binary=:all: \
   -r "${ROOT}/requirements.txt"
 
-rm -rf "${PLUGIN_DIR}"
-mkdir -p "${PLUGIN_DIR}"
-cp "${ROOT}/BarWidget.qml" "${ROOT}/Model.js" \
-  "${ROOT}/Panel.qml" "${ROOT}/manifest.json" "${PLUGIN_DIR}/"
+# `omarchy plugin add` clones straight into PLUGIN_DIR; don't delete the checkout.
+if [[ ! "${ROOT}" -ef "${PLUGIN_DIR}" ]]; then
+  rm -rf "${PLUGIN_DIR}"
+  mkdir -p "${PLUGIN_DIR}"
+  cp "${ROOT}/BarWidget.qml" "${ROOT}/Model.js" \
+    "${ROOT}/Panel.qml" "${ROOT}/manifest.json" "${PLUGIN_DIR}/"
+fi
 cp "${ROOT}/backend/yt_music.py" "${DATA_DIR}/yt_music.py"
 chmod 700 "${DATA_DIR}" "${VENV}"
 
