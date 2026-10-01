@@ -571,6 +571,8 @@ def cmd_play(args):
     if not args:
         fail("Usage: yt-music-ctl play <videoId>")
     video_id = args[0]
+    if not valid_video_id(video_id):
+        fail("Invalid video ID")
     mpv_play(video_id)
     props = get_mpv_props()
     write_status_from_mpv(props)
@@ -640,6 +642,8 @@ def cmd_like(args):
     if not args:
         fail("Usage: yt-music-ctl like <videoId>")
     video_id = args[0]
+    if not valid_video_id(video_id):
+        fail("Invalid video ID")
     ytm = get_ytmusic()
     try:
         ytm.rate_song(video_id, "LIKE")
@@ -672,6 +676,8 @@ def cmd_dislike(args):
     if not args:
         fail("Usage: yt-music-ctl dislike <videoId>")
     video_id = args[0]
+    if not valid_video_id(video_id):
+        fail("Invalid video ID")
     ytm = get_ytmusic()
 
     rated = False
@@ -722,6 +728,8 @@ def cmd_unlike(args):
     if not args:
         fail("Usage: yt-music-ctl unlike <videoId>")
     video_id = args[0]
+    if not valid_video_id(video_id):
+        fail("Invalid video ID")
     ytm = get_ytmusic()
     try:
         ytm.rate_song(video_id, "INDIFFERENT")
@@ -798,6 +806,8 @@ def cmd_remove(args):
     if len(args) < 2:
         fail("Usage: yt-music-ctl remove <playlistId> <videoId>")
     playlist_id, video_id = args[0], args[1]
+    if not valid_video_id(video_id):
+        fail("Invalid video ID")
     ytm = get_ytmusic()
     try:
         # Liked Music is a YouTube system playlist, so it must be edited by
@@ -886,6 +896,8 @@ def cmd_mix(args):
     if not args:
         fail("Usage: yt-music-ctl mix <videoId> [playlistId]")
     seed_id = args[0]
+    if not valid_video_id(seed_id):
+        fail("Invalid video ID")
     ytm = get_ytmusic(require_auth=False)
     try:
         watchlist = ytm.get_watch_playlist(seed_id, limit=50)

@@ -35,6 +35,9 @@ The installer creates a private virtual environment under
 lock, installs the bar plugin, and enables it in the Omarchy bar. The installer
 does not upgrade pip or download unpinned dependencies.
 
+If you added the plugin with `omarchy plugin add`, run `./install.sh` from
+`~/.config/omarchy/plugins/yt-music` to install the backend.
+
 Log in after installation:
 
 ```bash
@@ -58,6 +61,13 @@ reused separately.
 Authentication headers are stored locally in `~/.config/yt-music/auth.json`
 with owner-only permissions. No credentials, playlists, or playback state
 are included in this repository.
+
+Browser cookies are not only read at login. If the saved session stops
+validating, any player action that needs your account re-reads the YouTube
+cookies from your Chromium-based browser (or Firefox) and overwrites
+`auth.json` with them. To stop this, delete `~/.config/yt-music/auth.json`;
+also sign out of YouTube in the browser if you don't want a later
+`yt-music-ctl login` to pick the session up again.
 
 ## License
 

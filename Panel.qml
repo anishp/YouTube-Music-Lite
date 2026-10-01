@@ -648,7 +648,7 @@ Panel {
                 onClicked: {
                   root.close()
                   loginRefresh.start()
-                  if (root.bar) root.bar.run("omarchy-launch-terminal " + root.ctlPath + " login")
+                  Util.execArgv(["omarchy-launch-terminal", root.ctlPath, "login"])
                 }
               }
             }
